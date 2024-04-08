@@ -2,12 +2,7 @@
 package com.example.demo.config;
 
 
-import com.example.demo.entities;
-import com.example.demo.entities.Country;
-import com.example.demo.entities.Customer;
-import com.example.demo.entities.Division;
-import com.example.demo.entities.Excursion;
-import com.example.demo.entities.Vacation;
+import com.example.demo.entities.*;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;

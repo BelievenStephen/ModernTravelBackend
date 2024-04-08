@@ -30,9 +30,9 @@ public class Cart {
     @Column(name = "party_size")
     private int partySize;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private StatusType status;
+//    @Enumerated(EnumType.STRING)
+//    @Column(name = "status")
+//    private StatusType status;
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)

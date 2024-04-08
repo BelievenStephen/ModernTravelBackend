@@ -58,7 +58,7 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
-        this.postalCode = postal_code;
+        this.postalCode = postalCode;
         this.phone = phone;
         this.division = division;
     }

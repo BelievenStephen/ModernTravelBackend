@@ -39,14 +39,14 @@ public class Division {
     private long countryId;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "division")
-    private set<Customer> customers = new HashSet<>();
+    private Set<Customer> customers = new HashSet<>();
 
     public Division() {
 
     }
 
     public void setCountry(Country country) {
-        setCountry_id(country.getId());
+        setCountryId(country.getId());
         this.country = country;
     }
 }
