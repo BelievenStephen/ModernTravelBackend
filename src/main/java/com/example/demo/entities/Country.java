@@ -1,8 +1,11 @@
 package com.example.demo.entities;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.util.Date;
 import java.util.Set;
 
@@ -11,26 +14,28 @@ import java.util.Set;
 @Getter
 @Setter
 public class Country {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "country_id")
     private Long id;
 
-    @Column(name = "country_name")
+    @Column(name = "country")
     private String countryName;
 
-    @Column(name = "create_date")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date", nullable = false, updatable = false)
+    @CreationTimestamp
     private Date createDate;
 
     @Column(name = "last_update")
-    @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
     private Date lastUpdate;
 
-    @OneToMany(mappedBy = "country")
-    private Set<Division> divisions;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
+    private Set<Division> divisions = new HashSet<>();
 
     public Country() {
-        // Your default constructor
     }
+
 }
+

@@ -2,16 +2,17 @@ package com.example.demo.entities;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "divisions")
 @Getter
 @Setter
-@NoArgsConstructor
 public class Division {
 
     @Id
@@ -20,38 +21,32 @@ public class Division {
     private Long id;
 
     @Column(name = "division")
-    private String division_name;
+    private String divisionName;
 
     @CreationTimestamp
     @Column(name = "create_date")
-    private Date create_date;
+    private Date createDate;
 
     @UpdateTimestamp
     @Column(name = "last_update")
-    private Date last_Update;
+    private Date lastUpdate;
 
-    @ManyToOne
-    @JoinColumn(name = "country_id", nullable = false)
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id", nullable = false, insertable = false, updatable = false)
     private Country country;
 
-    @OneToMany(mappedBy = "division")
-    private Set<Customer> customers;
+    @Column(name = "Country_ID")
+    private long countryId;
 
-//    Got this code below from video, likely later on in project
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "division")
+    private set<Customer> customers = new HashSet<>();
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name="Country_ID", nullable = false, insertable = false, updatable = false)
-//    private Country country;
+    public Division() {
 
-//    TODO verify, not in UML but appears necessary
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "division")
-//    private set<Customer> customers = new HashSet<>();
+    }
 
-//    TODO fix for ront end not populate division
-//    @Column(name = "Country_ID")
-//    private long country_id;
-//    public void setCountry(Country country) {
-//        setCountry_id(country.getId());
-//        this.country = country;
-//    }
+    public void setCountry(Country country) {
+        setCountry_id(country.getId());
+        this.country = country;
+    }
 }

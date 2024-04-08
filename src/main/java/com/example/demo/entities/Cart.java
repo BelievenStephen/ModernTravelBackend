@@ -1,16 +1,20 @@
 package com.example.demo.entities;
 
-import lombok.Getter;
-import lombok.Setter;
 import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "carts")
 @Getter
 @Setter
+@EqualsAndHashCode(of = "id")
+@ToString
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,37 +28,25 @@ public class Cart {
     private BigDecimal packagePrice;
 
     @Column(name = "party_size")
-    private Integer partySize;
+    private int partySize;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private StatusType status;
 
-    @Column(name = "create_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
-
-    @Column(name = "last_update")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastUpdate;
-
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @OneToMany(mappedBy = "cart", fetch = FetchType.LAZY)
-    private Set<CartItem> cartItems;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CartItem> cartItems = new HashSet<>();
 
-    public Cart() {
-    }
+    @CreationTimestamp
+    @Column(name = "create_date", nullable = false, updatable = false)
+    private Date create_date;
 
-    public enum StatusType {
-        PENDING,
-        ORDERED,
-        CANCELED; // Use the spelling that is consistent with your database if it differs from the UML
-    }
+    @UpdateTimestamp
+    @Column(name = "last_update")
+    private Date last_update;
 
-    public BigDecimal calculateTotalPrice() {
-        return BigDecimal.ZERO;
-    }
 }
