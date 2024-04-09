@@ -31,18 +31,18 @@ public class Customer {
     private String address;
 
     @Column(name = "postal_code", nullable = false)
-    private String postalCode;
+    private String postal_code;
 
     @Column(name = "phone", nullable = false)
     private String phone;
 
     @Column(name = "create_date")
     @CreationTimestamp
-    private Date createDate;
+    private Date create_date;
 
     @Column(name = "last_update")
     @UpdateTimestamp
-    private Date lastUpdate;
+    private Date last_update;
 
     @ManyToOne
     @JoinColumn(name = "division_id")
@@ -58,7 +58,7 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
-        this.postalCode = postalCode;
+        this.postal_code = postal_code;
         this.phone = phone;
         this.division = division;
     }

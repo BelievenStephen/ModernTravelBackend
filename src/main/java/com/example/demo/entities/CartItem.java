@@ -28,8 +28,7 @@ public class CartItem {
     @JoinTable(
             name = "excursion_cartitem",
             joinColumns = @JoinColumn(name = "cart_item_id"),
-            inverseJoinColumns = @JoinColumn(name = "excursion_id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "excursion_id"))
     private Set<Excursion> excursions;
 
     @ManyToOne
@@ -38,11 +37,11 @@ public class CartItem {
 
     @Column(name = "create_date")
     @CreationTimestamp
-    private Date createDate;
+    private Date create_date;
 
     @Column(name = "last_update")
     @UpdateTimestamp
-    private Date lastUpdate;
+    private Date last_update;
 
     public CartItem() {
     }

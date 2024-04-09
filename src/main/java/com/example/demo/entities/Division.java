@@ -21,22 +21,22 @@ public class Division {
     private Long id;
 
     @Column(name = "division")
-    private String divisionName;
+    private String division_name;
 
     @CreationTimestamp
     @Column(name = "create_date")
-    private Date createDate;
+    private Date create_date;
 
     @UpdateTimestamp
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private Date last_update;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id", nullable = false, insertable = false, updatable = false)
     private Country country;
 
     @Column(name = "Country_ID")
-    private long countryId;
+    private long country_id;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "division")
     private Set<Customer> customers = new HashSet<>();
@@ -46,7 +46,7 @@ public class Division {
     }
 
     public void setCountry(Country country) {
-        setCountryId(country.getId());
+        setCountry_id(country.getId());
         this.country = country;
     }
 }

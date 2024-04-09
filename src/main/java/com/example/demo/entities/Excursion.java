@@ -23,21 +23,21 @@ public class Excursion {
     private Long id;
 
     @Column(name = "excursion_title")
-    private String excursionTitle;
+    private String excursion_title;
 
     @Column(name = "excursion_price")
-    private BigDecimal excursionPrice;
+    private BigDecimal excursion_price;
 
     @Column(name = "image_url")
-    private String imageUrl;
+    private String image_URL;
 
     @CreationTimestamp
-    @Column(name = "create_date", nullable = false, updatable = false)
-    private Date createDate;
+    @Column(name = "create_date")
+    private Date create_date;
 
     @UpdateTimestamp
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private Date last_update;
 
     @ManyToOne
     @JoinColumn(name = "vacation_id")
