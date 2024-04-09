@@ -29,9 +29,9 @@ public class Cart {
     @Column(name = "party_size")
     private int party_size;
 
-//    @Enumerated(value = EnumType.STRING)
-//    @Column(name = "status")
-//    private StatusType status;
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "status")
+    private StatusType status;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")

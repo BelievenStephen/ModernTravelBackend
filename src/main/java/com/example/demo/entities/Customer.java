@@ -18,22 +18,22 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id", nullable = false)
+    @Column(name = "customer_id")
     private Long id;
 
-    @Column(name = "customer_first_name", nullable = false)
+    @Column(name = "customer_first_name")
     private String firstName;
 
-    @Column(name = "customer_last_name", nullable = false)
+    @Column(name = "customer_last_name")
     private String lastName;
 
-    @Column(name = "address", nullable = false)
+    @Column(name = "address")
     private String address;
 
-    @Column(name = "postal_code", nullable = false)
+    @Column(name = "postal_code")
     private String postal_code;
 
-    @Column(name = "phone", nullable = false)
+    @Column(name = "phone")
     private String phone;
 
     @Column(name = "create_date")

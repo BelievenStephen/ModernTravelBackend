@@ -45,7 +45,6 @@ public class RestDataConfig implements RepositoryRestConfigurer {
         config.setDefaultPageSize(Integer.MAX_VALUE);
         config.setMaxPageSize(Integer.MAX_VALUE);
 
-
     }
 }
 
