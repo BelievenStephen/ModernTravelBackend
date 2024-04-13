@@ -22,38 +22,32 @@ public class CheckoutServiceImpl implements CheckoutService {
         this.cartRepository = cartRepository;
     }
 
-
     @Override
     @Transactional
     public PurchaseResponse placeOrder(Purchase purchase) {
         Cart cart = purchase.getCart();
+        Set<CartItem> cartItems = purchase.getCartItems();
+
+        if (cart == null || cartItems == null || cartItems.isEmpty()) {
+            return new PurchaseResponse("Cart is empty");
+        }
 
         String orderTrackingNumber = generateOrderTrackingNumber();
         cart.setOrderTrackingNumber(orderTrackingNumber);
 
-        Set<CartItem> cartItems = purchase.getCartItems();
-        cartItems.forEach(item -> cart.add(item));
-
-        cart.setCartItem(purchase.getCartItems());
-        cart.setCustomer(purchase.getCustomer());
+        cartItems.forEach(cart::add);
 
         Customer customer = purchase.getCustomer();
-
+        cart.setCustomer(customer);
         customer.add(cart);
 
         cart.setStatus(StatusType.ordered);
 
-        if (purchase.getCustomer() == null || purchase.getCart() == null || purchase.getCartItems().isEmpty()) {
-            return new PurchaseResponse("Cart is empty");
+        customerRepository.save(customer);
 
-        }
-        else {
-            customerRepository.save(customer);
-            cartRepository.save(cart);
-            return new PurchaseResponse(orderTrackingNumber);
-        }
-
+        return new PurchaseResponse(orderTrackingNumber);
     }
+
 
     private String generateOrderTrackingNumber() {
 
